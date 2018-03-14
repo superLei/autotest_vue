@@ -48,7 +48,7 @@
                   title: '表单样式',
                   sublist: [
                     {
-                      topath: '/Basicfrom',
+                      topath: '/tday',
                       title: '基本'
                     },
                     {

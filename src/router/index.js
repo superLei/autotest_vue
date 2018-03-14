@@ -4,6 +4,7 @@ import sidebar from '@/components/public/sidebar'
 //const Dday = resolve => require(['@/components/page/dday'], resolve)   //懒加载
 import dday from '@/components/page/dday'
 import Test1 from '@/components/public/Test1'
+import tday from '@/components/page/tday'
 
 Vue.use(Router)
 
@@ -21,6 +22,10 @@ export default new Router({
     {
       path: '/Test1',
       component: Test1
+    },
+    {
+      path: '/tday',
+      component: tday
     }
   ]
 })

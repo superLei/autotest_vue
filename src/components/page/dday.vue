@@ -34,23 +34,23 @@
       </div>
         <div>
           <el-dialog title="用例详情" :visible.sync="dialogFormVisible">
-            <el-form :model="form">
+            <el-form :model="inputList"  ref="inputList">
               <!-- <el-form-item label="日期" :label-width="formLabelWidth">
                 <el-date-picker  v-model="newdata.date"   type="date"  placeholder="选择日期"></el-date-picker>
               </el-form-item> -->
-                <el-form-item label="用例序号" :label-width="formLabelWidth">
+                <el-form-item label="用例序号" :label-width="formLabelWidth" prop ='case_id'>
                 <el-input v-model="inputList.case_id" auto-complete="off"></el-input>
               </el-form-item>
-                <el-form-item label="用例功能" :label-width="formLabelWidth">
+                <el-form-item label="用例功能" :label-width="formLabelWidth" prop ='case_func'>
                 <el-input v-model="inputList.case_func" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="用例名称" :label-width="formLabelWidth">
+              <el-form-item label="用例名称" :label-width="formLabelWidth" prop ='case_name'>
                 <el-input  v-model="inputList.case_name" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="请求数据" :label-width="formLabelWidth">
+              <el-form-item label="请求数据" :label-width="formLabelWidth" prop ='case_input'>
                 <el-input v-model="inputList.case_input" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="期望结果" :label-width="formLabelWidth">
+              <el-form-item label="期望结果" :label-width="formLabelWidth" prop ='case_result'>
                 <el-input v-model="inputList.case_result" auto-complete="off"></el-input>
               </el-form-item>
               
@@ -65,85 +65,87 @@
 </template>
 
 <script>
-    import querytime from '../public/time'
-    export default {
-        
-       
-        data: function () {
-            return {
-              inputList: {},
-              caseList: [],
-              showUrl: 'http://127.0.0.1:8000/api/show_cases',
-              addUrl: 'http://127.0.0.1:8000/api/add_case',
-              delUrl: 'http://127.0.0.1:8000/api/del_case',
-              dialogTableVisible: false,
-              dialogFormVisible: false,
-            }
-        },
-        mounted: function() {
-            this.getCase()
-           },
-        methods:{
-          getCase (){  // 获取
-            this.$http.get(this.showUrl).then(
-              (response) => {
-                var res = JSON.parse(response.bodyText)
-                if(res.code == '000') {
-                  this.caseList = res['caseList']
-                } else {
-                  this.$message.console.error('查询用例失败');
-                  console.log(res['message'])
-                }
-              }
-            )
-          },
-          addCase (){  //添加
-          // debugger
-            this.$http.post(this.addUrl, JSON.stringify(this.inputList)).then(
-              (response) => {
-                var res = JSON.parse(response.bodyText)
-                if(res.code == '000') {
-                  this.getCase()
-                  this.dialogFormVisible = false;
-                } else {
-                  this.$message.console.error('添加用例失败')
-                  console.log(res['message'])
-                }
-              }
-              
-            )
-            this.newdata="";
-            this.dialogFormVisible = true;
-          },
-          increase (){  //添加
-            this.dialogFormVisible = true;
-          },
-          caseEdit (index,row){
-            this.caseList = row // 把数据赋给row实例
-            this.caseList.case_id = 'case_id'
-            this.dialogFormVisible = true
-            
-          },
-          delCase (index){
-            this.caseList.splice(index,1) // 1就是删除一行
-             this.$http.post(this.delUrl, JSON.stringify(this.inputList)).then(
-              (response) => {
-                var res = JSON.parse(response.bodyText)
-                if(res.code == '000') {
-                  this.getCase()
-                  // this.dialogFormVisible = false;
-                } else {
-                  this.$message.console.error('添加用例失败')
-                  console.log(res['message'])
-                }
-              }
-              
-            )
-          }
-            
+import querytime from "../public/time";
+export default {
+  data: function() {
+    return {
+      inputList: {
+        case_id :'',
+        case_func:'',
+        case_name:'',
+        case_input:'',
+        case_result:'',
+        case_time:'',
+},
+      caseList: [],
+      showUrl: "http://127.0.0.1:8000/api/show_cases",
+      addUrl: "http://127.0.0.1:8000/api/add_case",
+      delUrl: "http://127.0.0.1:8000/api/del_case",
+      dialogTableVisible: false,
+      dialogFormVisible: false
+    };
+  },
+  mounted: function() {
+    this.getCase();
+  },
+  methods: {
+    getCase() {
+      // 获取
+      this.$http.get(this.showUrl).then(response => {
+        var res = JSON.parse(response.bodyText);
+        if (res.code == "000") {
+          this.caseList = res["caseList"];
+        } else {
+          this.$message.error("查询用例失败");
+          console.log(res["message"]);
         }
-        
+      });
+    },
+    addCase() {
+      //添加
+      debugger
+      this.$http
+        .post(this.addUrl, JSON.stringify(this.inputList))
+        .then(response => {
+          var res = JSON.parse(response.bodyText);
+          if (res.code == "000") {
+            this.getCase();
+            this.dialogFormVisible = false;
+      this.$refs['inputList'].resetFields()
+          } else {
+            this.$message.error("添加用例失败");
+            console.log(res["message"]);
+          }
+        });
+      this.newdata = "";
+      this.dialogFormVisible = true;
+    },
+    increase() {
+      //添加
+      // debugger
+      this.dialogFormVisible = true;
+    },
+    caseEdit(index, row) {
+      this.caseList = row; // 把数据赋给row实例
+      this.caseList.case_id = "case_id";
+      this.dialogFormVisible = true;
+    },
+    delCase(index) {
+      const case_name = this.caseList[index].fields.case_name;
+      this.$http.post(this.delUrl, { case_name }).then(response => {
+        var res = JSON.parse(response.bodyText);
+        if (res.code == "000") {
+          // this.caseList.splice(index, 1); // 1就是删除一行
+          this.getCase();
+          // this.dialogFormVisible = false;
+        } else {
+          this.$message.error("删除失败");
+          console.log(res["message"]);
+        }
+      });
     }
+  }
+};
 </script>
 
 <style scoped>

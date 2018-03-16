@@ -3,7 +3,7 @@
       <el-menu :default-active="$route.path"  class="el-menu-vertical-demo" unique-opened  router>
         <template v-for="bitem in billitem">
           <template v-if="bitem.sublist">
-            <el-submenu  :index="bitem.index">
+            <el-submenu  :index="bitem.index" :key="bitem.index">
               <template slot="title"><i  :class="bitem.icon"></i>{{bitem.title}}</template>
               <el-menu-item  v-for="(subitem,myindex) in bitem.sublist" :index="subitem.topath" :key="myindex"  >
                 {{subitem.title}}
@@ -11,7 +11,7 @@
             </el-submenu>
           </template>
           <template v-else>
-            <el-menu-item  :index="bitem.index">
+            <el-menu-item  :index="bitem.index" :key="bitem.index">
               <i  :class="bitem.icon"></i>
               {{bitem.title}}
             </el-menu-item>
@@ -98,12 +98,12 @@
               ]
             }
         },
-        computed: {
-          onRoutes: function () {
-            console.log(this.$route.path)
-            return this.$route.path.replace('/','');  //$route.path表示当前路由，:index能直接跳转路由
-          }
-        }
+        // computed: {
+        //   onRoutes: function () {
+        //     console.log(this.$route.path)
+        //     return this.$route.path.replace('/', '');  //$route.path表示当前路由，:index能直接跳转路由
+        //   }
+        // }
     }
 </script>
 

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import sidebar from '@/components/public/sidebar'
-//const Dday = resolve => require(['@/components/page/dday'], resolve)   //懒加载
+import navmenu from '@/components/public/navmenu'
 import dday from '@/components/page/dday'
 import Test1 from '@/components/public/Test1'
 import tday from '@/components/page/tday'
@@ -15,6 +15,11 @@ export default new Router({
       name: 'sidebar',
       component: sidebar
     },
+    // {
+    //   path: '/',
+    //   name: 'navmenu',
+    //   component: navmenu
+    // },
     {
       path: '/dday',
       component: dday

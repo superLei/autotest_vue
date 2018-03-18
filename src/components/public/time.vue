@@ -5,11 +5,11 @@
       type="datetime"
       placeholder="选择日期时间">
     </el-date-picker>
-     <!-- <span>——</span>
+     <span>——</span>
      <el-date-picker
        type="datetime"
        placeholder="选择日期时间">
-     </el-date-picker>-->
+     </el-date-picker>
    </div> 
 </template>
 

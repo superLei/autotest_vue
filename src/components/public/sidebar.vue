@@ -22,89 +22,84 @@
 </template>
 
 <script>
-    export default {
-        name: '',
-        data: function () {
-            return {
-              billitem:[
-                {
-                  icon: 'el-icon-star-on',
-                  index: 'sameday',
-                  title: '功能管理',
-                  sublist: [
-                    {
-                      topath: '/dday',
-                      title: '添加功能'
-                    },
-                    {
-                      topath: '/Test1',
-                      title: '添加用例'
-                    }
-                  ]
-                },
-                {
-                  icon: 'el-icon-upload',
-                  index: 'ctyle',
-                  title: '表单样式',
-                  sublist: [
-                    {
-                      topath: '/tday',
-                      title: '基本'
-                    },
-                    {
-                      topath: '/Upflie',
-                      title: '文件上传'
-                    }
-                  ]
-
-                },
-                {
-                  icon: 'el-icon-setting',
-                  index: 'chartstyle',
-                  title: '图表样式',
-                  sublist: [
-                    {
-                      topath: '/Ccurve',
-                      title: '曲线图'
-                    },
-                    {
-                      topath: '/Ccolumn',
-                      title: '柱状图'
-                    },
-                    {
-                      topath: '/Cpie',
-                      title: '饼状图'
-                    },
-                    {
-                      topath: '/Cannular',
-                      title: '环形图'
-                    },
-                    {
-                      topath: '/Cblend',
-                      title: '地图'
-                    }
-                  ]
-                },
-                {
-                  icon: 'el-icon-menu',
-                  index: '/tableplugin',
-                  title: '数据axios请求'
-                },
-                {
-                  icon: 'el-icon-date',
-                  index: '/drag',
-                  title: '消费总结'
-                }
-              ]
-            }
+export default {
+  name: '',
+  data: function () {
+    return {
+      billitem: [
+             {
+          icon: 'el-icon-menu',
+          index: '/tableplugin',
+          title: '项目概览'
         },
-        // computed: {
-        //   onRoutes: function () {
-        //     console.log(this.$route.path)
-        //     return this.$route.path.replace('/', '');  //$route.path表示当前路由，:index能直接跳转路由
-        //   }
-        // }
+        {
+          icon: 'el-icon-star-on',
+          index: 'sameday',
+          title: '功能管理',
+          sublist: [
+            {
+              topath: '/dday',
+              title: '添加功能'
+            },
+            {
+              topath: '/Test1',
+              title: '添加用例'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-upload',
+          index: 'ctyle',
+          title: '压力测试',
+          sublist: [
+            {
+              topath: '/tday',
+              title: '基本'
+            },
+            {
+              topath: '/dday2',
+              title: '文件上传'
+            }
+          ]
+
+        },
+        {
+          icon: 'el-icon-setting',
+          index: 'chartstyle',
+          title: '测试报告',
+          sublist: [
+            {
+              topath: '/Ccurve',
+              title: '曲线图'
+            },
+            {
+              topath: '/Ccolumn',
+              title: '柱状图'
+            },
+            {
+              topath: '/Cpie',
+              title: '饼状图'
+            },
+            {
+              topath: '/Cannular',
+              title: '环形图'
+            },
+            {
+              topath: '/Cblend',
+              title: '地图'
+            }
+          ]
+        }
+      ]
     }
+  },
+  computed: {
+    onRoutes: function () {
+      console.log(this.$route.path)
+      return this.$route.path.replace('/', '') // $route.path表示当前路由，:index能直接跳转路由
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -120,4 +115,3 @@
     height:100%;
   }
 </style>
-

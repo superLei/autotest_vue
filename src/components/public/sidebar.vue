@@ -27,9 +27,9 @@ export default {
   data: function () {
     return {
       billitem: [
-             {
+        {
           icon: 'el-icon-menu',
-          index: '/tableplugin',
+          index: '/charts2',
           title: '项目概览'
         },
         {

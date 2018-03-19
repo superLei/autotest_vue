@@ -29,7 +29,7 @@ export default {
       billitem: [
         {
           icon: 'el-icon-menu',
-          index: '/charts2',
+          index: '/charts',
           title: '项目概览'
         },
         {
@@ -69,7 +69,7 @@ export default {
           title: '测试报告',
           sublist: [
             {
-              topath: '/Ccurve',
+              topath: '/charts3',
               title: '曲线图'
             },
             {

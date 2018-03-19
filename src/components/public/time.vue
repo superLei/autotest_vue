@@ -10,16 +10,16 @@
        type="datetime"
        placeholder="选择日期时间">
      </el-date-picker>
-   </div> 
+   </div>
 </template>
 
 <script>
-    export default {
-        name: '',
-        data: function () {
-            return {}
-        }
-    }
+export default {
+  name: '',
+  data: function () {
+    return {}
+  }
+}
 </script>
 
 <style scoped>

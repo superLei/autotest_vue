@@ -9,14 +9,14 @@
 </template>
 
 <script>
-  import itemheader from './components/public/header'
-  import itemsidebar from './components/public/sidebar'
+import itemheader from './components/public/header'
+import itemsidebar from './components/public/sidebar'
 export default {
-    name: 'app',
-    components:{
-      itemheader,
-      itemsidebar
-    }
+  name: 'app',
+  components: {
+    itemheader,
+    itemsidebar
+  }
 }
 </script>
 
@@ -45,4 +45,3 @@ body{
     margin-top:20px;
   }
 </style>
-

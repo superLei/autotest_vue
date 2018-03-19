@@ -166,7 +166,7 @@ export default {
       console.log(this.inputList.case_id)
     },
     searchCase () {
-      if (this.input21 == '') {
+      if (this.input21 === '') {
         return
       }
       const case_name = this.input21
@@ -186,7 +186,7 @@ export default {
       const case_name = this.caseList[index].fields.case_name
       this.$http.post(this.delUrl, { case_name }).then(response => {
         var res = JSON.parse(response.bodyText)
-        if (res.code == '000') {
+        if (res.code === '000') {
           // this.caseList.splice(index, 1); // 1就是删除一行
           this.getCase()
           // this.dialogFormVisible = false;

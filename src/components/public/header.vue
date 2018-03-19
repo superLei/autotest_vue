@@ -17,12 +17,12 @@
 </template>
 
 <script>
-    export default {
-        name: '',
-        data: function () {
-            return {}
-        }
-    }
+export default {
+  name: '',
+  data: function () {
+    return {}
+  }
+}
 </script>
 
 <style scoped>

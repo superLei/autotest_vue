@@ -1,7 +1,21 @@
 <template>
-  <div>
+<!-- <el-row>
+  <el-col :span="6">
+  <div class="grid-content bg-purple"></div>
+  </el-col>
+  <el-col :span="6" :offset="6">
+  <div class="grid-content bg-purple"></div>
+   <div>
     <canvas id="myCanvas"></canvas>
   </div>
+  </el-col>
+</el-row> -->
+<el-row type="flex" class="row-bg"  justify="end">
+  <el-col :span="6"><div class="grid-content bg-purple"><canvas id="myCanvas"></canvas></div></el-col>
+  <!-- <el-col :span="6"><div class="grid-content bg-purple-light"><canvas id="myCanvas"></canvas></div></el-col> -->
+  <!-- <el-col :span="6"><div class="grid-content bg-purple"><canvas id="myCanvas"></canvas></div></el-col> -->
+</el-row>
+ 
 </template>
 
 <script>

@@ -73,11 +73,11 @@ export default {
               title: '曲线图'
             },
             {
-              topath: '/Ccolumn',
+              topath: '/test',
               title: '柱状图'
             },
             {
-              topath: '/Cpie',
+              topath: '/test2',
               title: '饼状图'
             },
             {

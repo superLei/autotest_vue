@@ -1,7 +1,11 @@
 <template>
-<div class="time-graph">
+<el-row>
+  <el-col :span="4"><div class="time-graph">
           <canvas id="weather-graph-canvas" width="160" height="160"></canvas>
-        </div>
+          <p>完成进度</p>
+        </div></el-col>
+</el-row>
+
 </template>
 
 <script>

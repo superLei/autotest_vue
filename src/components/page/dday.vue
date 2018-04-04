@@ -70,134 +70,141 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
-      input21: '',
-      formLabelWidth: '80px',
+      input21: "",
+      formLabelWidth: "80px",
       inputList: {
-        case_id: '',
-        case_func: '',
-        case_name: '',
-        case_input: '',
-        case_result: '',
-        case_time: ''
+        case_id: "",
+        case_func: "",
+        case_name: "",
+        case_input: "",
+        case_result: "",
+        case_time: ""
       },
       caseList: [],
-      showUrl: 'http://127.0.0.1:8000/api/show_cases',
-      addUrl: 'http://127.0.0.1:8000/api/add_case',
-      delUrl: 'http://127.0.0.1:8000/api/del_case',
-      editUrl: 'http://127.0.0.1:8000/api/edit_case',
-      searchUrl: 'http://127.0.0.1:8000/api/search_case',
+      showUrl: "http://127.0.0.1:8000/api/show_cases",
+      addUrl: "http://127.0.0.1:8000/api/add_case",
+      delUrl: "http://127.0.0.1:8000/api/del_case",
+      editUrl: "http://127.0.0.1:8000/api/edit_case",
+      searchUrl: "http://127.0.0.1:8000/api/search_case",
       dialogTableVisible: false,
       dialogFormVisible: false
-    }
+    };
   },
-  mounted: function () {
-    this.getCase()
+  mounted: function() {
+    this.getCase();
   },
   methods: {
-    getCase () {
+    getCase() {
       // 获取
       this.$http.get(this.showUrl).then(response => {
-        var res = JSON.parse(response.bodyText)
-        if (res.code === '000') {
-          this.caseList = res['caseList']
+        var res = JSON.parse(response.bodyText);
+        if (res.code === "000") {
+          this.caseList = res["caseList"];
         } else {
-          this.$message.error('查询用例失败')
-          console.log(res['message'])
+          this.$message.error("查询用例失败");
+          console.log(res["message"]);
         }
-      })
+      });
     },
-    addCase () {
+    addCase() {
       // 添加
-      // debugger
+      debugger;
       this.$http
-        .post(this.addUrl, JSON.stringify(this.inputList))
+        .post(
+          this.isUpdate ? this.editUrl : this.addUrl,
+          JSON.stringify(this.inputList)
+        )
         .then(response => {
-          var res = JSON.parse(response.bodyText)
-          if (res.code == '000') {
-            this.getCase()
-            this.dialogFormVisible = false
-            this.$refs['inputList'].resetFields()
+          var res = JSON.parse(response.bodyText);
+          if (res.code == "000") {
+            this.getCase();
+            this.dialogFormVisible = false;
+            this.$refs["inputList"].resetFields();
           } else {
-            this.$message.error('添加用例失败')
-            console.log(res['message'])
+            this.$message.error(
+              this.isUpdate ? "update用例失败" : "添加用例失败"
+            );
+            console.log(res["message"]);
           }
-        })
+        });
       // this.newdata = "";
       // this.dialogFormVisible = true;
     },
-    increase () {
+    increase() {
       // 添加
-      this.dialogFormVisible = true
+      this.dialogFormVisible = true;
     },
-    handlecancel (formName) {
+    handlecancel(formName) {
       // 取消
-      this.dialogFormVisible = false
-      this.$data = this.$refs[formName].resetFields()
+      this.dialogFormVisible = false;
+      this.$data = this.$refs[formName].resetFields();
     },
 
-    caseEdit (index, row) {
-      // 编辑
-      this.dialogFormVisible = true
-      // this.$data = this.$refs[formName].resetFields();
-      this.inputList = row // 把当行的值赋给InputList
-      this.$http
-        .post(this.editUrl, JSON.stringify(this.inputList))
-        .then(response => {
-          var res = JSON.parse(response.bodyText)
-          if (res.code == '000') {
-            this.getCase()
-            this.dialogFormVisible = false
-            // this.$refs['inputList'].resetFields()
-          } else {
-            this.$message.error('更新用例失败')
-            console.log(res['message'])
-          }
-        })
-    },
-    handleEdit: function (index, row) {
+    // caseEdit(index, row) {
+    //   // 编辑
+    //   this.dialogFormVisible = true;
+    //   // this.$data = this.$refs[formName].resetFields();
+    //   this.inputList = row; // 把当行的值赋给InputList
+    //   this.$http
+    //     .post(this.editUrl, JSON.stringify(this.inputList))
+    //     .then(response => {
+    //       var res = JSON.parse(response.bodyText);
+    //       if (res.code == "000") {
+    //         this.getCase();
+    //         this.dialogFormVisible = false;
+    //         // this.$refs['inputList'].resetFields()
+    //       } else {
+    //         this.$message.error("更新用例失败");
+    //         console.log(res["message"]);
+    //       }
+    //     });
+    // },
+    handleEdit: function(index, row) {
       // 编辑数据
-      debugger
-      this.inputList = row
+      this.inputList = row.fields;
+      this.isUpdate = true;
       // this.inputList = Object.assign({}, row);
       // this.inputList.case_id = "case_id";
-      this.dialogFormVisible = true
-      console.log(this.inputList.case_id)
+      this.dialogFormVisible = true;
+      debugger;
+      console.log(this.inputList.case_id);
     },
-    searchCase () {
-      if (this.input21 === '') {
-        return
+    searchCase() {
+      if (this.input21 === "") {
+         this.getCase();
+         return;
       }
-      const case_name = this.input21
+      const case_name = this.input21;
       this.$http.post(this.searchUrl, { case_name }).then(response => {
-        var res = JSON.parse(response.bodyText)
-        if (res.code == '000') {
+        var res = JSON.parse(response.bodyText);
+        if (res.code == "000") {
           // this.caseList.splice(index, 1); // 1就是删除一行
-          this.caseList = res['caseList']
+          this.caseList = res["caseList"];
           // this.dialogFormVisible = false;
         } else {
-          this.$message.error('没有找到' + this.input21)
-          console.log(res['message'])
+          this.$message.error("没有找到" + this.input21);
+          console.log(res["message"]);
         }
-      })
+      });
     },
-    delCase (index) {
-      const case_name = this.caseList[index].fields.case_name
+    delCase(index) {
+      const case_name = this.caseList[index].fields.case_name;
       this.$http.post(this.delUrl, { case_name }).then(response => {
-        var res = JSON.parse(response.bodyText)
-        if (res.code === '000') {
+        var res = JSON.parse(response.bodyText);
+        if (res.code === "000") {
           // this.caseList.splice(index, 1); // 1就是删除一行
-          this.getCase()
+          this.getCase();
           // this.dialogFormVisible = false;
         } else {
-          this.$message.error('删除失败')
-          console.log(res['message'])
+          this.$message.error("删除失败");
+          console.log(res["message"]);
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>

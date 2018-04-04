@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@antv/g2": "^3.0.5-beta.6",
+    "bootstrap-vue": "^2.0.0-rc.2",
     "echarts": "^4.0.4",
     "element-ui": "^2.2.2",
     "v-charts": "^1.16.6",

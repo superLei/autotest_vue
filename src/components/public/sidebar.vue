@@ -44,6 +44,10 @@ export default {
             {
               topath: '/Test1',
               title: '添加用例'
+            },
+            {
+              topath: '/login',
+              title: '登录信息'
             }
           ]
         },

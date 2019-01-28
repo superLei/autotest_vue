@@ -17,7 +17,3 @@
     </b-card-group>
 </div>
 </template>
-
-<script>
-
-</script>

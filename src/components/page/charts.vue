@@ -1,64 +1,44 @@
 <template>
-<!-- <el-row>
-  <el-col :span="6">
-  <div class="grid-content bg-purple"></div>
-  </el-col>
-  <el-col :span="6" :offset="6">
-  <div class="grid-content bg-purple"></div>
-   <div>
-    <canvas id="myCanvas"></canvas>
-  </div>
-  </el-col>
-</el-row> -->
-<el-row type="flex" class="row-bg"  justify="end">
-  <el-col :span="6"><div class="grid-content bg-purple"><canvas id="myCanvas"></canvas></div></el-col>
-  <!-- <el-col :span="6"><div class="grid-content bg-purple-light"><canvas id="myCanvas"></canvas></div></el-col> -->
-  <!-- <el-col :span="6"><div class="grid-content bg-purple"><canvas id="myCanvas"></canvas></div></el-col> -->
-</el-row>
- 
+  <el-row display="margin-top:10px">
+    <el-input v-model="input" placeholder="请输入集团ID" style="display:inline-table; width: 30%; float:left"></el-input>
+    <el-input v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
+    <el-button type="primary" @click="addBook()" style="float:left; margin: 2px;">查询</el-button>
+    <el-button type="primary" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
+  </el-row>
+
 </template>
 
 <script>
 export default {
   mounted: function () {
-    this.drawRing(100, 100, 80)
+    // this.drawRing(100, 100, 80)
   },
   methods: {
-    drawRing (w, h, val) {
-    // 先创建一个canvas画布对象，设置宽高
-      var c = document.getElementById('myCanvas')
-      var ctx = c.getContext('2d')
-      ctx.canvas.width = w
-      ctx.canvas.height = h
-      // 圆环有两部分组成，底部灰色完整的环，根据百分比变化的环
-      // 先绘制底部完整的环
-      // 起始一条路径
-      ctx.beginPath()
-      // 设置当前线条的宽度
-      ctx.lineWidth = 10// 10px
-      // 设置笔触的颜色
-      ctx.strokeStyle = '#CCCCCC'
-      // arc()方法创建弧/曲线（用于创建圆或部分圆）arc(圆心x,圆心y,半径,开始角度,结束角度)
-      ctx.arc(50, 50, 40, 0, 2 * Math.PI)
-      // 绘制已定义的路径
-      ctx.stroke()
-
-      // 绘制根据百分比变动的环
-      ctx.beginPath()
-      ctx.lineWidth = 10
-      ctx.strokeStyle = '#d54540'
-      // 设置开始处为0点钟方向（-90*Math.PI/180）
-      // x为百分比值（0-100）
-      ctx.arc(50, 50, 40, -90 * Math.PI / 180, (val * 3.6 - 90) * Math.PI / 180)
-      ctx.stroke()
-      // 绘制中间的文字
-      ctx.font = '20px Arial'
-      ctx.fillStyle = '#747474'
-      ctx.textBaseline = 'middle'
-      ctx.textAlign = 'center'
-      ctx.fillText(val + '%', 50, 50)
+    addBook () {
+      this.$http
+        .get('http://127.0.0.1:7083/index/findCard2?groupID=' + this.input + '&cardNO=' + this.cardno)
+        .then(response => {
+          var res = JSON.parse(response.bodyText)
+          if (res[0].cardid >= 0) {
+            this.$message.info('ok')
+          } else {
+            this.$message.error((res[0].cardid).toString())
+          }
+        })
+    },
+    delCard () {
+      this.$http
+        .get('http://127.0.0.1:7083/index/delCard?groupID=' + this.input + '&cardNO=' + this.cardno)
+        .then(response => {
+          var res = JSON.parse(response.bodyText)
+          if (res.cardNO >= 0) {
+            this.$message.info('卡号' + (res.cardNO).toString() + '删除成功')
+          } else {
+            this.$message.error((res.cardNO).toString() + '删除失败')
+          }
+        })
     }
   }
-  // drawRing(100, 100, 30);
+
 }
 </script>

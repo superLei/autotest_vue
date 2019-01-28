@@ -16,7 +16,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.2",
     "echarts": "^4.0.4",
-    "element-ui": "^2.2.2",
+    "element-ui": "^2.4.11",
     "v-charts": "^1.16.6",
     "v-circle": "^0.1.3",
     "vue": "^2.5.2",

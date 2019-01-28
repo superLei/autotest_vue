@@ -8,6 +8,7 @@ import Test1 from '@/components/public/Test1'
 import tday from '@/components/page/tday'
 import test2 from '@/components/page/test2'
 import test from '@/components/page/test'
+import login from '@/components/page/login'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -53,6 +54,10 @@ export default new Router({
     {
       path: '/tday',
       component: tday
+    },
+    {
+      path: '/login',
+      component: login
     }
   ]
 })

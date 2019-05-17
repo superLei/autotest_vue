@@ -33,6 +33,11 @@ export default {
           title: '项目概览'
         },
         {
+          icon: 'el-icon-menu',
+          index: '/chrometojson',
+          title: '转换json'
+        },
+        {
           icon: 'el-icon-star-on',
           index: 'sameday',
           title: '功能管理',

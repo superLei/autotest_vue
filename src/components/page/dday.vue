@@ -111,6 +111,7 @@ export default {
     this.getCase()
     this.isUpdate = false
   },
+  // 具体方法在methods模块实现
   methods: {
     getCase () {
       // 获取

@@ -9,6 +9,7 @@ import tday from '@/components/page/tday'
 import test2 from '@/components/page/test2'
 import test from '@/components/page/test'
 import login from '@/components/page/login'
+import chrometojson from '@/components/page/chrometojson'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -58,6 +59,10 @@ export default new Router({
     {
       path: '/login',
       component: login
+    },
+    {
+      path: '/chrometojson',
+      component: chrometojson
     }
   ]
 })

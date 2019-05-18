@@ -1,12 +1,12 @@
-const config = require("config");  //路径你们改下
+// const config = require("./config");  //路径你们改下
 module.exports = {
   proxy: {
-    [config.ROOT]: {    //将www.exaple.com印射为/apis
-      target: config.PROXYROOT,,  // 接口域名
+    '/api': {    //将服务端接口域名印射为/api
+      target: 'http://127.0.0.1:8088',  // 服务端接口域名和端口号
     secure: false,  // 如果是https接口，需要配置这个参数
     changeOrigin: true,  //是否跨域
     pathRewrite: {
-      [`^${config.ROOT}`]: ''   //需要rewrite的
+      '^/api': ''   //需要rewrite的
     }
   }
 }

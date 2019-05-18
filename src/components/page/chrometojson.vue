@@ -28,7 +28,7 @@ export default {
     return {
       textarea: '',
       result: '',
-      url: 'http://127.0.0.1:8088/index/tojson'
+      url: '/api/index/tojson'
     }
   },
   created () {

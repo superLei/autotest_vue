@@ -1,5 +1,5 @@
 //项目域名地址
-const url = 'http://example.com';
+const url = 'http://www.exaple.com:8088';
 
 
 let ROOT;

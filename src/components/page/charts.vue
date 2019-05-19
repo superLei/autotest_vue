@@ -1,6 +1,14 @@
 <template>
-  <el-row display="margin-top:10px">
-    <el-input v-model="input" placeholder="请输入集团ID" style="display:inline-table; width: 30%; float:left"></el-input>
+  <el-row  class="row-01">
+    <el-select v-model="value" filterable placeholder="请选择" class="sel-groupid">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+    <!--<el-input v-model="input" placeholder="请输入集团ID" style="display:inline-table; width: 30%; float:left"></el-input>-->
     <el-input v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
     <el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>
     <el-button type="primary" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
@@ -10,6 +18,18 @@
 
 <script>
 export default {
+  data () {
+    return {
+      options: [{
+        value: '1155',
+        label: '集团1155'
+      }, {
+        value: '11157',
+        label: '集团11157'
+      }],
+      value: ''
+    }
+  },
   mounted: function () {
     // this.drawRing(100, 100, 80)
   },
@@ -42,3 +62,12 @@ export default {
 
 }
 </script>
+<style scoped>
+  .row-01{
+    margin-top:10px;
+  }
+  .sel-groupid{
+    width: 30%;
+    float:left
+  }
+</style>

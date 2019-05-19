@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg">
     <el-row>
       <el-col :span="12">
         <div class="grid-content bg-purple-dark">
@@ -68,5 +68,8 @@ export default {
   }
   .btnCss{
     margin-bottom: 10px;
+  }
+  .bg{
+    background: #fff;
   }
 </style>

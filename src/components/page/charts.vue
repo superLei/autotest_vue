@@ -8,7 +8,6 @@
         :value="item.value">
       </el-option>
     </el-select>
-    <!--<el-input v-model="input" placeholder="请输入集团ID" style="display:inline-table; width: 30%; float:left"></el-input>-->
     <el-input v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
     <el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>
     <el-button type="primary" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
@@ -36,23 +35,32 @@ export default {
   methods: {
     queryCard () {
       this.$http
-        .get('http://127.0.0.1:8088/index/findCard2?groupID=' + this.input + '&cardNO=' + this.cardno)
+        .get('http://127.0.0.1:8089/index/findCard2?groupID=' + this.value + '&cardNO=' + this.cardno)
         .then(response => {
-          var res = JSON.parse(response.bodyText)
-          if (res[0].cardid >= 0) {
-            this.$message.info('ok')
+          try {
+            var res = JSON.parse(response.bodyText)
+            var cardId0 = (res[0] != null) ? res[0].cardid : -1
+            var cardId1 = (res[1] != null) ? res[1].cardid : -1
+          } catch (e) {
+            console.log('捕获到异常：', e)
+          }
+          if (cardId0 >= 0 || cardId1 >= 0) {
+            this.$message({
+              message: '查询到有此会员',
+              type: 'success'
+            })
           } else {
-            this.$message.error((res[0].cardid).toString())
+            this.$message.error('错了哦，没有查询到~_~')
           }
         })
     },
     delCard () {
       this.$http
-        .get('http://127.0.0.1:8088/index/delCard?groupID=' + this.input + '&cardNO=' + this.cardno)
+        .get('http://127.0.0.1:8089/index/delCard?groupID=' + this.value + '&cardNO=' + this.cardno)
         .then(response => {
           var res = JSON.parse(response.bodyText)
           if (res.cardNO >= 0) {
-            this.$message.info('卡号' + (res.cardNO).toString() + '删除成功')
+            this.$message('卡号' + (res.cardNO).toString() + '删除成功')
           } else {
             this.$message.error((res.cardNO).toString() + '删除失败')
           }

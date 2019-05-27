@@ -206,7 +206,7 @@ export default {
       // this.inputList = Object.assign({}, row);
       // this.inputList.login_groupId = "login_groupId";
       this.dialogFormVisible = true
-      debugger
+      // debugger
       console.log(this.inputList.case_func)
     },
     searchCase: function () {

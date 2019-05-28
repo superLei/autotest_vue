@@ -35,7 +35,7 @@ export default {
   methods: {
     queryCard () {
       this.$http
-        .get('http://127.0.0.1:8089/index/findCard2?groupID=' + this.value + '&cardNO=' + this.cardno)
+        .get('http://172.16.33.47:8089/index/findCard2?groupID=' + this.value + '&cardNO=' + this.cardno)
         .then(response => {
           try {
             var res = JSON.parse(response.bodyText)
@@ -56,7 +56,7 @@ export default {
     },
     delCard () {
       this.$http
-        .get('http://127.0.0.1:8089/index/delCard?groupID=' + this.value + '&cardNO=' + this.cardno)
+        .get('http://172.16.33.47:8089/index/delCard?groupID=' + this.value + '&cardNO=' + this.cardno)
         .then(response => {
           var res = JSON.parse(response.bodyText)
           if (res.cardNO >= 0) {

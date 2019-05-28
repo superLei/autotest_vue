@@ -100,7 +100,6 @@ export default {
     increase () {
       // 添加
       this.dialogFormVisible = true
-      debugger
     },
     handlecancel (formName) {
       // 页面关闭
@@ -115,7 +114,6 @@ export default {
       // this.inputList = Object.assign({}, row);
       // this.inputList.login_groupId = "login_groupId";
       this.dialogFormVisible = true
-      debugger
       console.log(this.inputList.login_groupId)
     },
     getCase () {

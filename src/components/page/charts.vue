@@ -1,6 +1,6 @@
 <template>
   <el-row  class="row-01">
-    <el-select v-model="value" filterable placeholder="请选择" class="sel-groupid">
+    <el-select v-model="groupID" filterable placeholder="请选择" class="sel-groupid">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -8,7 +8,7 @@
         :value="item.value">
       </el-option>
     </el-select>
-    <el-input v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
+    <el-input class="input-cardNo" v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
     <el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>
     <el-button type="primary" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
   </el-row>
@@ -20,13 +20,12 @@ export default {
   data () {
     return {
       options: [{
-        value: '1155',
+        groupID: '1155',
         label: '集团1155'
       }, {
-        value: '11157',
+        groupID: '11157',
         label: '集团11157'
-      }],
-      value: ''
+      }]
     }
   },
   mounted: function () {
@@ -35,7 +34,7 @@ export default {
   methods: {
     queryCard () {
       this.$http
-        .get('http://172.16.33.47:8089/index/findCard2?groupID=' + this.value + '&cardNO=' + this.cardno)
+        .get('/api/index/findCard2?groupID=' + this.value + '&cardNO=' + this.cardno)
         .then(response => {
           try {
             var res = JSON.parse(response.bodyText)
@@ -56,7 +55,7 @@ export default {
     },
     delCard () {
       this.$http
-        .get('http://172.16.33.47:8089/index/delCard?groupID=' + this.value + '&cardNO=' + this.cardno)
+        .get('/api/index/delCard?groupID=' + this.groupID + '&cardNO=' + this.cardno)
         .then(response => {
           var res = JSON.parse(response.bodyText)
           if (res.cardNO >= 0) {

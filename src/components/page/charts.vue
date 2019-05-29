@@ -27,16 +27,14 @@ export default {
         label: '集团11157'
       }],
       groupID: '1155',
+      // 默认值必须有
       cardno: ''
     }
-  },
-  mounted: function () {
-    // this.drawRing(100, 100, 80)
   },
   methods: {
     queryCard () {
       this.$http
-        .get('/api/index/findCard2?groupID=' + this.value + '&cardNO=' + this.cardno)
+        .get('api/index/findCard2?groupID=' + this.groupID + '&cardNO=' + this.cardno)
         .then(response => {
           try {
             var res = JSON.parse(response.bodyText)
@@ -57,7 +55,7 @@ export default {
     },
     delCard () {
       this.$http
-        .get('/api/index/delCard?groupID=' + this.groupID + '&cardNO=' + this.cardno)
+        .get('api/index/delCard?groupID=' + this.groupID + '&cardNO=' + this.cardno)
         .then(response => {
           var res = JSON.parse(response.bodyText)
           if (res.cardNO >= 0) {

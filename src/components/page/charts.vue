@@ -3,9 +3,9 @@
     <el-select v-model="groupID" filterable placeholder="请选择" class="sel-groupid">
       <el-option
         v-for="item in options"
-        :key="item.value"
+        :key="item.groupID"
         :label="item.label"
-        :value="item.value">
+        :value="item.groupID">
       </el-option>
     </el-select>
     <el-input class="input-cardNo" v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
@@ -25,7 +25,9 @@ export default {
       }, {
         groupID: '11157',
         label: '集团11157'
-      }]
+      }],
+      groupID: '1155',
+      cardno: ''
     }
   },
   mounted: function () {

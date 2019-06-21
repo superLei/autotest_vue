@@ -8,6 +8,16 @@
         :value="item.groupID">
       </el-option>
     </el-select>
+
+    <el-select v-model="flag" filterable placeholder="请选择" class="sel-groupid">
+      <el-option
+        v-for="item in flags"
+        :key="item.flag"
+        :label="item.label"
+        :value="item.flag">
+      </el-option>
+    </el-select>
+
     <el-input class="input-cardNo" v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
     <el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>
     <el-button type="primary" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
@@ -26,6 +36,15 @@ export default {
         groupID: '11157',
         label: '集团11157'
       }],
+      flags: [{
+        flag: 'mobile',
+        label: '手机号'
+      }, {
+        flag: 'card',
+        label: '会员卡号'
+      }
+      ],
+      flag: 'card',
       groupID: '1155',
       // 默认值必须有
       cardno: ''
@@ -55,13 +74,15 @@ export default {
     },
     delCard () {
       this.$http
-        .get('api/index/delCard?groupID=' + this.groupID + '&cardNO=' + this.cardno)
+        .get('api/index/delCard?groupID=' + this.groupID + '&cardNO=' + this.cardno + '&flag=' + this.flag)
         .then(response => {
           var res = JSON.parse(response.bodyText)
-          if (res.cardNO >= 0) {
-            this.$message('卡号' + (res.cardNO).toString() + '删除成功')
+          console.log(res)
+          console.log(res.status)
+          if (res.status === true) {
+            this.$message('卡号' + res.cardNO + '删除成功')
           } else {
-            this.$message.error((res.cardNO).toString() + '删除失败')
+            this.$message.error(res.cardNO + '删除失败')
           }
         })
     }

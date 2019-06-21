@@ -28,12 +28,12 @@ export default {
     return {
       billitem: [
         {
-          icon: 'el-icon-menu',
+          icon: 'el-icon-s-tools',
           index: '/charts',
-          title: '项目概览'
+          title: '会员清除'
         },
         {
-          icon: 'el-icon-menu',
+          icon: 'el-icon-s-cooperation',
           index: '/chrometojson',
           title: '转换json'
         },

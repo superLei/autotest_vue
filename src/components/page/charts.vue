@@ -1,27 +1,33 @@
 <template>
-  <el-row  class="row-01">
-    <el-select v-model="groupID" filterable placeholder="请选择" class="sel-groupid">
-      <el-option
-        v-for="item in options"
-        :key="item.groupID"
-        :label="item.label"
-        :value="item.groupID">
-      </el-option>
-    </el-select>
-
-    <el-select v-model="flag" filterable placeholder="请选择" class="sel-groupid">
-      <el-option
-        v-for="item in flags"
-        :key="item.flag"
-        :label="item.label"
-        :value="item.flag">
-      </el-option>
-    </el-select>
-
-    <el-input class="input-cardNo" v-model="cardno" placeholder="请输入会员卡号" style="display:inline-table; width: 30%; float:left"></el-input>
-    <el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>
-    <el-button type="primary" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
-  </el-row>
+  <el-form ref="form" :model="form" label-width="80px">
+    <el-form-item label="会员">
+      <el-input class="input-cardNo" v-model="cardno" placeholder="请输入手机号或卡号" style="display:inline-table; width: 30%; float:left"></el-input>
+    </el-form-item>
+    <el-form-item label="方式">
+      <el-select v-model="flag" filterable placeholder="请选择" class="sel-groupid">
+        <el-option
+          v-for="item in flags"
+          :key="item.flag"
+          :label="item.label"
+          :value="item.flag">
+        </el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item label="集团">
+      <el-select v-model="groupID" filterable placeholder="请选择" class="sel-groupid">
+        <el-option
+          v-for="item in options"
+          :key="item.groupID"
+          :label="item.label"
+          :value="item.groupID">
+        </el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>
+      <el-button type="primary" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
+    </el-form-item>
+  </el-form>
 
 </template>
 
@@ -44,8 +50,8 @@ export default {
         label: '会员卡号'
       }
       ],
-      flag: 'card',
-      groupID: '1155',
+      flag: 'mobile',
+      groupID: '11157',
       // 默认值必须有
       cardno: ''
     }
@@ -53,7 +59,7 @@ export default {
   methods: {
     queryCard () {
       this.$http
-        .get('api/index/findCard2?groupID=' + this.groupID + '&cardNO=' + this.cardno)
+        .get('api/index/findCard2?groupID=' + this.groupID + '&cardNO=' + this.cardno + '&flag=' + this.flag)
         .then(response => {
           try {
             var res = JSON.parse(response.bodyText)
@@ -78,11 +84,13 @@ export default {
         .then(response => {
           var res = JSON.parse(response.bodyText)
           console.log(res)
-          console.log(res.status)
           if (res.status === true) {
-            this.$message('卡号' + res.cardNO + '删除成功')
+            this.$message({
+              message: this.flag + ': ' + res.cardNO + '\n删除成功',
+              type: 'success'
+            })
           } else {
-            this.$message.error(res.cardNO + '删除失败')
+            this.$message.error(res.cardNO + '\n删除失败')
           }
         })
     }
@@ -91,9 +99,6 @@ export default {
 }
 </script>
 <style scoped>
-  .row-01{
-    margin-top:10px;
-  }
   .sel-groupid{
     width: 30%;
     float:left

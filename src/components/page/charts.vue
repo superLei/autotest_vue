@@ -63,8 +63,8 @@ export default {
         .then(response => {
           try {
             var res = JSON.parse(response.bodyText)
-            var cardId0 = (res[0] != null) ? res[0].cardid : -1
-            var cardId1 = (res[1] != null) ? res[1].cardid : -1
+            var cardId0 = (res[0][0] != null) ? res[0][0].cardid : -1
+            var cardId1 = (res[1][0] != null) ? res[1][0].cardid : -1
           } catch (e) {
             console.log('捕获到异常：', e)
           }

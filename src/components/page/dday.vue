@@ -35,6 +35,18 @@
             <span style="margin-left: 10px">{{ scope.row.fields.case_result }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="测试环境" style="text-align: center">
+          <template slot-scope="scope">
+            <el-select v-model="value" placeholder="请选择">
+              <el-option
+                v-for="item in envs"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="small" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -86,6 +98,13 @@ export default {
     return {
       input21: '',
       formLabelWidth: '80px',
+      envs: [
+        {
+          value: '11009',
+          label: '集团11009'
+        }
+      ],
+      value: '',
       inputList: {
         case_id: '',
         case_func: '',

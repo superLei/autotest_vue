@@ -4,6 +4,7 @@ import charts from '@/components/page/charts'
 import charts2 from '@/components/page/charts2'
 import charts3 from '@/components/page/charts3'
 import dday from '@/components/page/dday'
+import dday2 from '@/components/page/dday2'
 import Test1 from '@/components/public/Test1'
 import tday from '@/components/page/tday'
 import test2 from '@/components/page/test2'
@@ -18,6 +19,8 @@ Vue.use(Router)
 Vue.use(BootstrapVue)
 
 export default new Router({
+  // 去除地址中的#号
+  mode: 'history',
   routes: [
     {
       path: '/charts2',
@@ -47,6 +50,10 @@ export default new Router({
     {
       path: '/dday',
       component: dday
+    },
+    {
+      path: '/dday2',
+      component: dday2
     },
     {
       path: '/Test1',

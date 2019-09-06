@@ -82,8 +82,13 @@ export default {
       this.$http
         .get('api/index/delCard?groupID=' + this.groupID + '&cardNO=' + this.cardno + '&flag=' + this.flag)
         .then(response => {
-          var res = JSON.parse(response.bodyText)
-          console.log(res)
+          try {
+            var res = JSON.parse(response.bodyText)
+            console.log(res)
+          } catch (e) {
+            this.$message.error('删除失败')
+            console.log('捕获到异常：', e)
+          }
           if (res.status === true) {
             this.$message({
               message: this.flag + ': ' + res.cardNO + '\n删除成功',

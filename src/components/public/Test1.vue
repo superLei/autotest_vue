@@ -1,45 +1,48 @@
 <template>
 
-    <div class="home">
+  <div class="home" >
       <div>
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item><a href="/dday">添加功能</a></el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/dday'}" >添加用例</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-        </el-breadcrumb>
-      </div>
-    <el-row display="margin-top:10px">
-        <el-input v-model="input" placeholder="请输入" style="display:inline-table; width: 30%; float:left"></el-input>
-        <el-button type="primary" @click="showWindow()" style="float:left; margin: 2px;">新增</el-button>
-    </el-row>
-    <el-row>
-        <el-table :data="inputList.tableData" style="width: 100%" border @expand-change="see">
+      <el-breadcrumb separator="/"  separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/dday">添加功能</a></el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/dday'}" >添加用例</el-breadcrumb-item>
+        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <div><Br/></div>
+      <div>
+        <el-row display="margin-top:10px">
+          <el-input v-model="input" placeholder="请输入" style="display:inline-table; width: 30%; float:left"></el-input>
+          <el-button type="primary" @click="showWindow()" style="float:left; margin: 2px;">新增</el-button>
+        </el-row>
+        <el-row>
+          <el-table :data="inputList.tableData" style="width: 100%" border @expand-change="see">
 
-          <el-table-column type="expand" >
-            <template slot-scope="props">
-              <el-form label-position="left" inline class="demo-table-expand">
-                <el-form-item label="商品名称">
-                  <span>{{ props.row.fields.run }}</span>
-                </el-form-item>
-                <el-form-item label="商品名称2">
-                  <span>{{ props.row.fields.run2 }}</span>
-                </el-form-item>
-              </el-form>
-            </template>
-          </el-table-column>
-          <!--<el-table-column prop="id" label="功能描述" min-width="100">-->
+            <el-table-column type="expand" >
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="商品名称">
+                    <span>{{ props.row.fields.run }}</span>
+                  </el-form-item>
+                  <el-form-item label="商品名称2">
+                    <span>{{ props.row.fields.run2 }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
+            <!--<el-table-column prop="id" label="功能描述" min-width="100">-->
             <!--<template scope="scope"> {{ scope.row.pk }} </template>-->
-          <!--</el-table-column>-->
-          <el-table-column prop="funDescription" label="功能名称" min-width="100">
-            <template scope="scope"> {{ scope.row.fields.funDescription }} </template>
-          </el-table-column>
-          <el-table-column prop="creator" label="创建人" min-width="100">
-            <template scope="scope"> {{ scope.row.fields.creator }} </template>
-          </el-table-column>
+            <!--</el-table-column>-->
+            <el-table-column prop="funDescription" label="功能名称" min-width="100">
+              <template scope="scope"> {{ scope.row.fields.funDescription }} </template>
+            </el-table-column>
+            <el-table-column prop="creator" label="创建人" min-width="100">
+              <template scope="scope"> {{ scope.row.fields.creator }} </template>
+            </el-table-column>
 
-</el-table>
-    </el-row>
+          </el-table>
+        </el-row>
+      </div>
       <div>
         <el-dialog title="功能详情" :visible.sync="dialogFormVisible" width="30%">
           <el-form :model="inputList" ref="inputList" :label-width="formLabelWidth">
@@ -116,7 +119,7 @@ export default {
           var res = JSON.parse(response.bodyText)
           console.log(res)
           if (res.code === '000') {
-            // 绑定返回数据到组件中
+            // 绑定返回数据到组合的list中
             this.inputList.tableData = res['func']
           } else {
             this.$message.error('查询失败')

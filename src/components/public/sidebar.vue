@@ -53,6 +53,10 @@ export default {
             {
               topath: '/login',
               title: '登录信息'
+            },
+            {
+              topath: '/caseEnv',
+              title: '测试环境'
             }
           ]
         },

@@ -4,6 +4,7 @@ import charts from '@/components/page/charts'
 import charts2 from '@/components/page/charts2'
 import charts3 from '@/components/page/charts3'
 import caseEnv from '@/components/page/caseEnv'
+import testcase from '@/components/page/testcase'
 import dday from '@/components/page/dday'
 import dday2 from '@/components/page/dday2'
 import Test1 from '@/components/public/Test1'
@@ -27,6 +28,11 @@ export default new Router({
       path: '/charts2',
       name: 'charts2',
       component: charts2
+    },
+    {
+      path: '/testcase',
+      name: 'testcase',
+      component: testcase
     },
     {
       path: '/caseEnv',

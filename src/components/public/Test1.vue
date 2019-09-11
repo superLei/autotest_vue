@@ -5,7 +5,7 @@
       <el-breadcrumb separator="/"  separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item><a href="/dday">添加功能</a></el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/dday'}" >添加用例</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/testcase'}" >添加用例</el-breadcrumb-item>
         <el-breadcrumb-item>活动详情</el-breadcrumb-item>
       </el-breadcrumb>
     </div>

@@ -3,7 +3,7 @@
     <div slot="header" class="clearfix">
       <el-button style="float: right;" type="primary" size="medium" @click="showDialogForm()">添加用例</el-button>
     </div>
-    <el-table :data="tableData" stripe style="width: 100%">
+    <el-table :data="tableData" border style="width: 100%">
       <el-table-column label="功能模块">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.fields.funDescription }}</span>
@@ -29,18 +29,6 @@
           <span style="margin-left: 10px">{{ scope.row.fields.desiredResult }}</span>
         </template>
       </el-table-column>
-      <!--<el-table-column label="测试环境" style="text-align: center">-->
-        <!--<template slot-scope="scope">-->
-          <!--<el-select v-model="value" placeholder="请选择">-->
-            <!--<el-option-->
-              <!--v-for="item in envs"-->
-              <!--:key="item.value"-->
-              <!--:label="item.label"-->
-              <!--:value="item.value">-->
-            <!--</el-option>-->
-          <!--</el-select>-->
-        <!--</template>-->
-      <!--</el-table-column>-->
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="small" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -49,7 +37,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="用例信息" :visible.sync="dialogFormVisible" width="45%">
+    <el-dialog title="用例信息" :visible.sync="dialogFormVisible" width="45%" @close="handlecancel('inputList')">
       <el-form :model="inputList" ref="inputList" label-width="80px">
         <el-form-item label="功能模块">
           <el-select v-model="value" placeholder="请选择">
@@ -67,14 +55,6 @@
             <el-radio :label=2>dohko</el-radio>
             <el-radio :label=3>线上</el-radio>
           </el-radio-group>
-          <!--<el-select v-model="envs" placeholder="请选择">-->
-            <!--<el-option-->
-              <!--v-for="item in envs"-->
-              <!--:key="item.value"-->
-              <!--:label="item.label"-->
-              <!--:value="item.value">-->
-            <!--</el-option>-->
-          <!--</el-select>-->
         </el-form-item>
         <el-form-item label="请求路径" prop='requestPath'>
           <el-input v-model="inputList.case_list.requestPath" ></el-input>
@@ -119,21 +99,12 @@ export default {
   name: 'testcase',
   data () {
     return {
-      input: '',
       dialogFormVisible: false,
       case_url: 'http://127.0.0.1:8000/api/query_case',
       case_env_url: 'http://127.0.0.1:8000/api/query_case_env',
       case_func_url: 'http://127.0.0.1:8000/api/case_func',
       execute_case_url: 'http://127.0.0.1:8000/api/execute_case',
-      envs: [
-        {
-          value: '11009',
-          label: '集团11009'
-        }
-      ],
-
       value: '',
-      isUpdate: false,
       optionData1: [],
       inputList: {
         operation: 'add',
@@ -149,7 +120,7 @@ export default {
           requestMethod: 0,
           creator: '',
           headerID: 1,
-          isLogin: false
+          isLogin: 0
         }
       },
       tableData: [],
@@ -234,19 +205,36 @@ export default {
       this.dialogFormVisible = true
     },
     handlecancel (formName) {
+      this.$refs[formName].resetFields()
+      this.inputList = {
+        operation: 'add',
+        case_list: {
+          caseDescription: '',
+          functionID: 0,
+          funDescription: '',
+          envID: 0,
+          envUrl: '',
+          requestJson: '',
+          requestPath: '',
+          desiredResult: '',
+          requestMethod: 0,
+          creator: '',
+          headerID: 1,
+          isLogin: 0
+        }
+      }
       // 取消
       this.dialogFormVisible = false
-      this.$data = this.$refs[formName].resetFields()
+      // this.data = this.inputList[formName].resetFields()
     },
     handleEdit: function (index, row) {
-      // 编辑数据
-      this.tableData = row.fields
-      this.isUpdate = true
-      // this.inputList = Object.assign({}, row);
-      // this.inputList.login_groupId = "login_groupId";
+      // 将行数据赋值到case_list中
+      this.inputList.case_list = row.fields
+      this.value = row.fields
+      // 显示编辑窗口
       this.dialogFormVisible = true
       // debugger
-      console.log(this.inputList.case_func)
+      // console.log(this.inputList.case_func)
     }
   }
 }

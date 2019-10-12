@@ -3,8 +3,8 @@
     <div slot="header" class="clearfix">
       <el-button style="float: right;" type="primary" size="medium" @click="showDialogForm()">添加用例</el-button>
     </div>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column label="功能模块">
+    <el-table :data="tableData" border style="width: 100%" >
+      <el-table-column label="功能模块" width="220">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.fields.funDescription }}</span>
         </template>
@@ -29,7 +29,7 @@
           <span style="margin-left: 10px">{{ scope.row.fields.desiredResult }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="220">
         <template slot-scope="scope">
           <el-button size="small" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-button size="small" type="danger" @click="delCase(scope.$index)">删除</el-button>

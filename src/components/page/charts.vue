@@ -1,11 +1,11 @@
 <template>
   <el-form ref="form" :model="form" label-width="80px">
     <el-form-item label="集团ID">
-      <el-input class="input-groupID" v-model="groupID" placeholder="请输入集团ID" style="display:inline-table; width: 30%; float:left"></el-input>
+      <el-input class="input-groupID" v-model="groupID" placeholder="请输入集团ID" ></el-input>
     </el-form-item>
     <el-form-item label="会员信息">
-      <el-input class="input-cardNo" v-model="cardno" placeholder="请输入手机号或卡号" style="width: 30%; float:left">
-        <el-select v-model="flag"  slot="prepend" placeholder="请选择" style="width: 60px;">
+      <el-input class="input-cardNo" v-model="cardno" placeholder="请输入手机号或卡号" >
+        <el-select v-model="flag"  slot="prepend" placeholder="请选择" >
           <el-option
             v-for="item in flags"
             :key="item.flag"
@@ -13,14 +13,14 @@
             :value="item.flag">
           </el-option>
         </el-select>
+        <el-button slot="append" @click="queryCard()" icon="el-icon-search"></el-button>
       </el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>
+      <!--<el-button type="primary" @click="queryCard()" style="float:left; margin: 2px;">查询</el-button>-->
       <el-button type="warning" @click="delCard()" style="float:left; margin: 2px;">删除会员</el-button>
     </el-form-item>
   </el-form>
-
 </template>
 
 <script>
@@ -32,7 +32,7 @@ export default {
         label: '手机号'
       }, {
         flag: 'card',
-        label: '会员卡号'
+        label: '卡号'
       }
       ],
       flag: 'mobile',
@@ -96,10 +96,9 @@ export default {
 </script>
 <style>
   .el-select .el-input {
-    width: 30px;
+    width: 100px;
   }
-  .el-input-group__prepend {
-    width: auto;
-    background-color: #fff;
+  .el-input {
+    width: 30%; float:left;
   }
 </style>

@@ -70,7 +70,7 @@ export default {
               title: '基本'
             },
             {
-              topath: '/dday2',
+              topath: '/clear',
               title: '文件上传'
             }
           ]

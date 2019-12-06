@@ -6,7 +6,7 @@ import charts3 from '@/components/page/charts3'
 import caseEnv from '@/components/page/caseEnv'
 import testcase from '@/components/page/testcase'
 import dday from '@/components/page/dday'
-import dday2 from '@/components/page/dday2'
+import clear from '@/components/page/clear'
 import Test1 from '@/components/public/Test1'
 import tday from '@/components/page/tday'
 import test2 from '@/components/page/test2'
@@ -64,8 +64,8 @@ export default new Router({
       component: dday
     },
     {
-      path: '/dday2',
-      component: dday2
+      path: '/clear',
+      component: clear
     },
     {
       path: '/Test1',

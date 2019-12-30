@@ -9,8 +9,6 @@ import dday from '@/components/page/dday'
 import clear from '@/components/page/clear'
 import Test1 from '@/components/public/Test1'
 import tday from '@/components/page/tday'
-import test2 from '@/components/page/test2'
-import test from '@/components/page/test'
 import login from '@/components/page/login'
 import chrometojson from '@/components/page/chrometojson'
 import BootstrapVue from 'bootstrap-vue'
@@ -38,16 +36,6 @@ export default new Router({
       path: '/caseEnv',
       name: 'caseEnv',
       component: caseEnv
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: test
-    },
-    {
-      path: '/test2',
-      name: 'test2',
-      component: test2
     },
     {
       path: '/charts',
